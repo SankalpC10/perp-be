@@ -1,10 +1,11 @@
 from fastapi import FastAPI, HTTPException
 from services.web_search import serper_search
-from services.utils import fetch_json_attributes, extract_citation_numbers
 from services.ai_service import generate_answer
 from services.related_questions import get_related_questions
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 app = FastAPI()
+handler = Mangum(app)
 
 origins = [
     "http://localhost:8000",
