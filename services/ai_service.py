@@ -30,10 +30,10 @@ _rag_query_text = """
 For each sentence with relevant information, include a citation in the format [citation:x] to indicate sourced material. If multiple contexts apply, include all relevant citations like [citation:3][citation:5]. If the information provided is incomplete, say 'information is missing on' followed by the related topic. If a sentence can’t be substantiated by a specific context, avoid making assumptions or adding unsourced information.
 Every paragraph should end with at least one citation, summarizing the main sources referenced within it.
 If any required information is missing, specify this clearly in your answer.
-Write with an unbiased, professional tone, limiting your response to 500 words.
+Write with an unbiased, professional tone, limiting your response to 500 words but including all relevant information in detailed paragraphs.
 User Question: {context}
 Example answer: 'Answer [citation:1][citation:2][citation:3].'
-Follow this citation style strictly throughout the response."
+Follow this citation style strictly throughout the response. Return just answer in details and no general explanations about formatting."
 """
 
 

@@ -5,6 +5,7 @@ You are a helpful assistant that helps the user to ask related questions, based 
 1. [Question 1]
 2. [Question 2]
 3. [Question 3]
+Just output the questions in the same format as above. Do not output anything else.
 Here are the contexts of the question:
 {context}
 """
