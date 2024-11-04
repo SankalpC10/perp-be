@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo Installing dependencies...
+      - "pip install -r requirements.txt --platform manylinux2014_x86_64 --target ./dependencies --only-binary=:all:"
+
+  build:
+    commands:
+      - echo Building the application...
+      - echo Moving dependencies to the root directory...
+      - mv dependencies/* ./
+      - rm -r dependencies
+      - echo Creating zip file...
+      - zip -r application.zip . -x ".*" -x "__MACOSX"
+
+  post_build:
+    commands:
+      - echo Uploading zip file to S3...
+      - aws s3 cp application.zip s3://${S3_BUCKET}/${S3_KEY}
+      - echo Updating Lambda function...
+      - aws lambda update-function-code --function-name ${LAMBDA_FUNCTION_NAME} --s3-bucket ${S3_BUCKET} --s3-key ${S3_KEY}
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
